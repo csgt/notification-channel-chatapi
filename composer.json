@@ -1,0 +1,42 @@
+{
+    "name": "csgt/notification-channel-chatapi",
+    "description": "Notification channel Chatapi.",
+    "homepage": "https://github.com/csgt/laravel-notification-channels-chatapi",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jose Galindo",
+            "email": "jgalindo@softlogic.com.gt",
+            "homepage": "https://github.com/csgt",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "illuminate/notifications": "5.7.*",
+        "illuminate/support": "5.7.*",
+        "illuminate/events": "5.7.*",
+        "illuminate/queue": "5.7.*",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "^0.9.5",
+        "phpunit/phpunit": "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "NotificationChannels\\Chatapi\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NotificationChannels\\Chatapi\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
