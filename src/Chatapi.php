@@ -37,13 +37,22 @@ class Chatapi
             'body'  => trim($message->content),
         ];
 
-        if (!$url = $this->config->getURL()) {
-            throw CouldNotSendNotification::missingURL();
+        if ($message->url) {
+            $url   = $message->url;
+            $token = $message->token;
+        } else {
+            if (!$url = $this->config->getURL()) {
+                throw CouldNotSendNotification::missingURL();
+            }
+            $token = $this->config->getToken();
         }
+
+        $url   = trim($url);
+        $token = trim($token);
 
         $cliente = new Client;
         try {
-            $response = $cliente->request('POST', $url . 'sendMessage?token=' . $this->config->getToken(), [
+            $response = $cliente->request('POST', $url . 'sendMessage?token=' . $token, [
                 'form_params' => $params, 'timeout' => 25]);
 
             $html = (string) $response->getBody();

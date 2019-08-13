@@ -18,6 +18,20 @@ class ChatapiMessage
     public $from;
 
     /**
+     * The chatapi url. (optional)
+     *
+     * @var string
+     */
+    public $url;
+
+    /**
+     * The chatapi token. (optional)
+     *
+     * @var string
+     */
+    public $token;
+
+    /**
      * Create a message object.
      * @param string $content
      * @return static
@@ -48,5 +62,25 @@ class ChatapiMessage
         $this->content = $content;
 
         return $this;
+    }
+
+    /**
+     * Set the chatapi url.
+     *
+     * @param  string $url
+     */
+    public function url($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * Set the chatapi token.
+     *
+     * @param  string $token
+     */
+    public function token($token)
+    {
+        $this->token = $token;
     }
 }
