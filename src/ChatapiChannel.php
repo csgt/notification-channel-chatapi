@@ -53,7 +53,7 @@ class ChatapiChannel
 
             return $this->chatapi->sendMessage($message, $to);
         } catch (Exception $exception) {
-            event(
+            $this->events->dispatch(
                 new NotificationFailed($notifiable, $notification, 'chatapi', ['message' => $exception->getMessage()])
             );
         }
