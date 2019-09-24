@@ -32,6 +32,34 @@ class ChatapiMessage
     public $token;
 
     /**
+     * The chatapi method. (optional)
+     *
+     * @var string
+     */
+    public $method;
+
+    /**
+     * The chatapi file. (Required if method is sendFile)
+     *
+     * @var string
+     */
+    public $file;
+
+    /**
+     * The chatapi filename. (Required if method is sendFile)
+     *
+     * @var string
+     */
+    public $filename;
+
+    /**
+     * The chatapi caption. (Required if method is sendFile)
+     *
+     * @var string
+     */
+    public $caption;
+
+    /**
      * Create a message object.
      * @param string $content
      * @return static
@@ -82,5 +110,45 @@ class ChatapiMessage
     public function token($token)
     {
         $this->token = $token;
+    }
+
+    /**
+     * Set the chatapi method.
+     *
+     * @param  string $method
+     */
+    public function method($method)
+    {
+        $this->method = $method;
+    }
+
+    /**
+     * Set the chatapi file.
+     *
+     * @param  string $file
+     */
+    public function file($file = '')
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Set the chatapi filename.
+     *
+     * @param  string $filename
+     */
+    public function filename($filename = '')
+    {
+        $this->filename = $filename;
+    }
+
+    /**
+     * Set the chatapi caption.
+     *
+     * @param  string $caption
+     */
+    public function caption($caption = '')
+    {
+        $this->caption = $caption;
     }
 }

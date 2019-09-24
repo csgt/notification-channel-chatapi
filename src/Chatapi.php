@@ -36,7 +36,10 @@ class Chatapi
             'phone' => $to,
             'body'  => trim($message->content),
         ];
-
+        $method = "sendMessage";
+        if ($message->method) {
+            $method = $message->method;
+        }
         if ($message->url) {
             $url   = $message->url;
             $token = $message->token;
@@ -52,9 +55,27 @@ class Chatapi
 
         $cliente = new Client;
         try {
-            $response = $cliente->request('POST', $url . 'sendMessage?token=' . $token, [
-                'form_params' => $params, 'timeout' => 25]);
+            switch ($method) {
+                case 'sendMessage':
+                    $response = $cliente->request('POST', $url . "sendMessage?token=" . $token, [
+                        'form_params' => $params, 'timeout' => 25]);
+                    break;
+                case 'sendFile':{
+                        if ($message->filename) {
+                            $params['filename'] = $message->filename;
+                        } else {
+                            abort(422, "Nombre de archivo es requerido para este método");
+                        }
 
+                        if ($message->caption) {
+                            $params['caption'] = $message->caption;
+                        }
+
+                        $response = $cliente->request('POST', $url . "sendFile?token=" . $token, [
+                            'form_params' => $params, 'timeout' => 25]);
+                    }
+                    break;
+            }
             $html = (string) $response->getBody();
         } catch (RequestException $e) {
             if ($e->hasResponse()) {
