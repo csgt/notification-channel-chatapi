@@ -60,6 +60,27 @@ class ChatapiMessage
     public $caption;
 
     /**
+     * The chatapi namespace. (Required if method is sendTemplate)
+     *
+     * @var string
+     */
+    public $namespacetemplate;
+
+    /**
+     * The chatapi template. (Required if method is sendTemplate)
+     *
+     * @var string
+     */
+    public $template;
+
+    /**
+     * The chatapi language. (Required if method is sendTemplate)
+     *
+     * @var string
+     */
+    public $language;
+
+    /**
      * Create a message object.
      * @param string $content
      * @return static
@@ -150,5 +171,35 @@ class ChatapiMessage
     public function caption($caption = '')
     {
         $this->caption = $caption;
+    }
+
+    /**
+     * Set the chatapi namespace.
+     *
+     * @param  string $namespacetemplate
+     */
+    public function namespacetemplate($namespacetemplate = '')
+    {
+        $this->namespacetemplate = $namespacetemplate;
+    }
+
+    /**
+     * Set the chatapi template.
+     *
+     * @param  string $template
+     */
+    public function template($template = '')
+    {
+        $this->template = $template;
+    }
+
+    /**
+     * Set the chatapi language.
+     *
+     * @param  string $language
+     */
+    public function language($language = '')
+    {
+        $this->language = $language;
     }
 }

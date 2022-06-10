@@ -75,6 +75,29 @@ class Chatapi
                             'form_params' => $params, 'timeout' => 25]);
                     }
                     break;
+                case 'sendTemplate':{
+                        if ($message->namespacetemplate) {
+                            $params['namespace'] = $message->namespacetemplate;
+                        } else {
+                            abort(422, "Namespace es requerido para este método");
+                        }
+
+                        if ($message->template) {
+                            $params['template'] = $message->template;
+                        } else {
+                            abort(422, "Template es requerido para este método");
+                        }
+
+                        if ($message->language) {
+                            $params['language'] = $message->language;
+                        } else {
+                            abort(422, "Language es requerido para este método");
+                        }
+
+                        $response = $cliente->request('POST', $url . "sendTemplate?token=" . $token, [
+                            'form_params' => $params, 'timeout' => 25]);
+                    }
+                    break;
             }
             $html = (string) $response->getBody();
         } catch (RequestException $e) {
