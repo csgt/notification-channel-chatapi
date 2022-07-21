@@ -81,6 +81,13 @@ class ChatapiMessage
     public $language;
 
     /**
+     * The chatapi params. (Optional if method is sendTemplate)
+     *
+     * @var string
+     */
+    public $params;
+
+    /**
      * Create a message object.
      * @param string $content
      * @return static
@@ -201,5 +208,15 @@ class ChatapiMessage
     public function language($language = '')
     {
         $this->language = $language;
+    }
+
+    /**
+     * Set the chatapi params.
+     *
+     * @param  string $params
+     */
+    public function params($params = '')
+    {
+        $this->params = $params;
     }
 }

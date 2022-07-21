@@ -94,6 +94,10 @@ class Chatapi
                             abort(422, "Language es requerido para este método");
                         }
 
+                        if ($message->params) {
+                            $params['params'] = $message->params;
+                        }
+
                         $response = $cliente->request('POST', $url . "sendTemplate?token=" . $token, [
                             'form_params' => $params, 'timeout' => 25]);
                     }
