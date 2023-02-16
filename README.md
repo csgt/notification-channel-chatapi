@@ -8,11 +8,11 @@ This package makes it easy to send [Chatapi notifications] with Laravel
 
 ## Installation
 
-| Package Version | Laravel Version |
-| --------------- | --------------- |
-| 5.x             | 5               |
-| 6.x             | 6               |
-| 7.x             | 7,8,9           |
+| Package Version | Laravel Version | Guzzle Version |
+| --------------- | --------------- | -------------- |
+| 5.x             | 5               | 6              |
+| 6.x             | 6               | 7              |
+| 7.x             | 7,8,9           | 6, 7           |
 
 ## Contents
 
