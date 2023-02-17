@@ -57,6 +57,8 @@ Add your Chatapi Account SID, Auth Token, and From Number (optional) to your `co
 ...
 ```
 
+It is important to note that the CHATAPI_URL env variable must have a trailing slash.
+
 ## Usage
 
 Now you can use the channel in your `via()` method inside the notification:
