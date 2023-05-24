@@ -4,6 +4,7 @@ namespace NotificationChannels\Chatapi\Exceptions;
 use NotificationChannels\Chatapi\ChatapiMessage;
 
 class CouldNotSendNotification extends \Exception
+
 {
     /**
      * @param mixed $message

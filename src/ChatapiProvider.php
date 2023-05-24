@@ -2,6 +2,9 @@
 namespace NotificationChannels\Chatapi;
 
 use Illuminate\Support\ServiceProvider;
+use NotificationChannels\Chatapi\Chatapi;
+use NotificationChannels\Chatapi\ChatapiConfig;
+use NotificationChannels\Chatapi\ChatapiChannel;
 
 class ChatapiProvider extends ServiceProvider
 {

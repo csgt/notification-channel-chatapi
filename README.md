@@ -7,20 +7,21 @@
 This package makes it easy to send [Chatapi notifications] with Laravel 5.4.
 
 ## Contents
-- [Usage](#usage)
-	- [Available Message methods](#available-message-methods)
-- [Changelog](#changelog)
-- [Testing](#testing)
-- [Security](#security)
-- [Contributing](#contributing)
-- [Credits](#credits)
-- [License](#license)
+
+-   [Usage](#usage)
+    -   [Available Message methods](#available-message-methods)
+-   [Changelog](#changelog)
+-   [Testing](#testing)
+-   [Security](#security)
+-   [Contributing](#contributing)
+-   [Credits](#credits)
+-   [License](#license)
 
 ## Installation
 
 You can install the package via composer:
 
-``` bash
+```bash
 composer require csgt/notification-channel-chatapi
 ```
 
@@ -44,15 +45,18 @@ Add your Chatapi Account SID, Auth Token, and From Number (optional) to your `co
 'chatapi' => [
     'url'   => env('CHATAPI_URL'),
     'token' => env('CHATAPI_TOKEN'),
+    'format' => env('CHATAPI_FORMAT')
 ],
 ...
 ```
+
+It is important that the CHATAPI_URL env variable must have a trailing slash.
 
 ## Usage
 
 Now you can use the channel in your `via()` method inside the notification:
 
-``` php
+```php
 use NotificationChannels\Chatapi\ChatapiChannel;
 use NotificationChannels\Chatapi\ChatapiMessage;
 use Illuminate\Notifications\Notification;
@@ -85,8 +89,8 @@ public function routeNotificationForChatapi()
 
 #### ChatapiSmsMessage
 
-- `from('')`: Accepts a phone to use as the notification sender.
-- `content('')`: Accepts a string value for the notification body.
+-   `from('')`: Accepts a phone to use as the notification sender.
+-   `content('')`: Accepts a string value for the notification body.
 
 ## Changelog
 
@@ -102,7 +106,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Credits
 
-- [CS](https://github.com/csgt)
+-   [CS](https://github.com/csgt)
 
 ## License
 

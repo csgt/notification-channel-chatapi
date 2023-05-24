@@ -1,9 +1,10 @@
 <?php
 namespace NotificationChannels\Chatapi;
 
-use GuzzleHttp\Psr7;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use NotificationChannels\Chatapi\ChatapiConfig;
+use NotificationChannels\Chatapi\ChatapiMessage;
 use NotificationChannels\Chatapi\Exceptions\CouldNotSendNotification;
 
 class Chatapi
@@ -58,7 +59,7 @@ class Chatapi
             switch ($method) {
                 case 'sendMessage':
                     $response = $cliente->request('POST', $url . "sendMessage?token=" . $token, [
-                        'form_params' => $params, 'timeout' => 25]);
+                        $this->config->getFormat() => $params, 'timeout' => 25]);
                     break;
                 case 'sendFile':{
                         if ($message->filename) {
@@ -72,7 +73,7 @@ class Chatapi
                         }
 
                         $response = $cliente->request('POST', $url . "sendFile?token=" . $token, [
-                            'form_params' => $params, 'timeout' => 25]);
+                            $this->config->getFormat() => $params, 'timeout' => 25]);
                     }
                     break;
                 case 'sendTemplate':{
@@ -99,7 +100,7 @@ class Chatapi
                         }
 
                         $response = $cliente->request('POST', $url . "sendTemplate?token=" . $token, [
-                            'form_params' => $params, 'timeout' => 25]);
+                            $this->config->getFormat() => $params, 'timeout' => 25]);
                     }
                     break;
             }
