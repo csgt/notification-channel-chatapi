@@ -2,8 +2,10 @@
 namespace NotificationChannels\Chatapi;
 
 use Exception;
+use NotificationChannels\Chatapi\Chatapi;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Events\Dispatcher;
+use NotificationChannels\Chatapi\ChatapiMessage;
 use Illuminate\Notifications\Events\NotificationFailed;
 use NotificationChannels\Chatapi\Exceptions\CouldNotSendNotification;
 

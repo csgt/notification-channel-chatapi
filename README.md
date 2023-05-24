@@ -45,7 +45,7 @@ You must install the service provider:
 
 ### Setting up your Chatapi account
 
-Add your Chatapi Account SID, Auth Token, and From Number (optional) to your `config/services.php`:
+Add your URL, Token and Format ('form-params' default or 'json') in `config/services.php`:
 
 ```php
 // config/services.php
@@ -53,6 +53,7 @@ Add your Chatapi Account SID, Auth Token, and From Number (optional) to your `co
 'chatapi' => [
     'url'   => env('CHATAPI_URL'),
     'token' => env('CHATAPI_TOKEN'),
+    'format' => env('CHATAPI_FORMAT')
 ],
 ...
 ```

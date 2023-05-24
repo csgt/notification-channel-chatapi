@@ -33,4 +33,9 @@ class ChatapiConfig
         return $this->config['token'];
     }
 
+    public function getFormat()
+    {
+        return $this->config['format'] ? $this->config['format'] : 'form-params';
+    }
+
 }
