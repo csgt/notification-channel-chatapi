@@ -50,6 +50,12 @@ class Chatapi
             $token = $this->config->getToken();
         }
 
+        if ($message->format) {
+            $format = $message->format;
+        } else {
+            $format = $this->config->getFormat();
+        }
+
         $url   = trim($url);
         $token = trim($token);
 
@@ -57,7 +63,7 @@ class Chatapi
         switch ($method) {
             case 'sendMessage':
                 $response = $cliente->request('POST', $url . "sendMessage?token=" . $token, [
-                    $this->config->getFormat() => $params, 'timeout' => 25]);
+                    $format => $params, 'timeout' => 25]);
                 break;
             case 'sendFile':{
                     if ($message->filename) {
@@ -71,7 +77,7 @@ class Chatapi
                     }
 
                     $response = $cliente->request('POST', $url . "sendFile?token=" . $token, [
-                        $this->config->getFormat() => $params, 'timeout' => 25]);
+                        $format => $params, 'timeout' => 25]);
                 }
                 break;
             case 'sendTemplate':{
@@ -98,7 +104,7 @@ class Chatapi
                     }
 
                     $response = $cliente->request('POST', $url . "sendTemplate?token=" . $token, [
-                        $this->config->getFormat() => $params, 'timeout' => 25]);
+                        $format => $params, 'timeout' => 25]);
                 }
                 break;
         }
