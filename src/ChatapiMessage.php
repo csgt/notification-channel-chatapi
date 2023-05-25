@@ -88,7 +88,7 @@ class ChatapiMessage
     public $params;
 
     /**
-     * The chatapi format. (form-params, json) default form-params
+     * The chatapi format. (form_params, json) default form_params
      *
      * @var string
      */
@@ -234,10 +234,10 @@ class ChatapiMessage
      */
     public function format($format)
     {
-        if (in_array($format, ['form-params', 'json'])) {
+        if (in_array($format, ['form_params', 'json'])) {
             $this->format = $format;
         } else {
-            $this->format = 'form-params';
+            $this->format = 'form_params';
         }
     }
 }
