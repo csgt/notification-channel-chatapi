@@ -236,8 +236,8 @@ class ChatapiMessage
     {
         if (in_array($format, ['form-params', 'json'])) {
             $this->format = $format;
+        } else {
+            $this->format = 'form-params';
         }
-
-        $this->format = 'form-params';
     }
 }
