@@ -36,10 +36,11 @@ class ChatapiConfig
     public function getFormat()
     {
         if (array_key_exists('format', $this->config)) {
-            return $this->config['format'];
+            if (in_array($this->config['format'], ['form-params', 'json'])) {
+                return $this->config['format'];
+            }
         }
 
         return 'form-params';
-
     }
 }
