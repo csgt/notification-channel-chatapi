@@ -88,6 +88,13 @@ class ChatapiMessage
     public $params;
 
     /**
+     * The chatapi format. (form-params, json) default form-params
+     *
+     * @var string
+     */
+    public $format;
+
+    /**
      * Create a message object.
      * @param string $content
      * @return static
@@ -218,5 +225,19 @@ class ChatapiMessage
     public function params($params = '')
     {
         $this->params = $params;
+    }
+
+    /**
+     * Set the chatapi format.
+     *
+     * @param  string $format
+     */
+    public function format($format)
+    {
+        if (in_array($format, ['form-params', 'json'])) {
+            $this->format = $format;
+        }
+
+        $this->format = 'form-params';
     }
 }

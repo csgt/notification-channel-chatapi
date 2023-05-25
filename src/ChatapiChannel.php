@@ -1,12 +1,10 @@
 <?php
 namespace NotificationChannels\Chatapi;
 
-use Exception;
 use NotificationChannels\Chatapi\Chatapi;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Events\Dispatcher;
 use NotificationChannels\Chatapi\ChatapiMessage;
-use Illuminate\Notifications\Events\NotificationFailed;
 use NotificationChannels\Chatapi\Exceptions\CouldNotSendNotification;
 
 class ChatapiChannel
@@ -43,22 +41,16 @@ class ChatapiChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        try {
-            $to      = $this->getTo($notifiable);
-            $message = $notification->toChatapi($notifiable);
-            if (is_string($message)) {
-                $message = new ChatapiMessage($message);
-            }
-            if (!$message instanceof ChatapiMessage) {
-                throw CouldNotSendNotification::invalidMessageObject($message);
-            }
-
-            return $this->chatapi->sendMessage($message, $to);
-        } catch (Exception $exception) {
-            $this->events->dispatch(
-                new NotificationFailed($notifiable, $notification, 'chatapi', ['message' => $exception->getMessage()])
-            );
+        $to      = $this->getTo($notifiable);
+        $message = $notification->toChatapi($notifiable);
+        if (is_string($message)) {
+            $message = new ChatapiMessage($message);
         }
+        if (!$message instanceof ChatapiMessage) {
+            throw CouldNotSendNotification::invalidMessageObject($message);
+        }
+
+        return $this->chatapi->sendMessage($message, $to);
     }
 
     /**

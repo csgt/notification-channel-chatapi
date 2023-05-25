@@ -2,7 +2,6 @@
 namespace NotificationChannels\Chatapi;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 use NotificationChannels\Chatapi\ChatapiConfig;
 use NotificationChannels\Chatapi\ChatapiMessage;
 use NotificationChannels\Chatapi\Exceptions\CouldNotSendNotification;
@@ -51,66 +50,65 @@ class Chatapi
             $token = $this->config->getToken();
         }
 
+        if ($message->format) {
+            $format = $message->format;
+        } else {
+            $format = $this->config->getFormat();
+        }
+
         $url   = trim($url);
         $token = trim($token);
 
         $cliente = new Client;
-        try {
-            switch ($method) {
-                case 'sendMessage':
-                    $response = $cliente->request('POST', $url . "sendMessage?token=" . $token, [
-                        $this->config->getFormat() => $params, 'timeout' => 25]);
-                    break;
-                case 'sendFile':{
-                        if ($message->filename) {
-                            $params['filename'] = $message->filename;
-                        } else {
-                            abort(422, "Nombre de archivo es requerido para este método");
-                        }
-
-                        if ($message->caption) {
-                            $params['caption'] = $message->caption;
-                        }
-
-                        $response = $cliente->request('POST', $url . "sendFile?token=" . $token, [
-                            $this->config->getFormat() => $params, 'timeout' => 25]);
+        switch ($method) {
+            case 'sendMessage':
+                $response = $cliente->request('POST', $url . "sendMessage?token=" . $token, [
+                    $format => $params, 'timeout' => 25]);
+                break;
+            case 'sendFile':{
+                    if ($message->filename) {
+                        $params['filename'] = $message->filename;
+                    } else {
+                        abort(422, "Nombre de archivo es requerido para este método");
                     }
-                    break;
-                case 'sendTemplate':{
-                        if ($message->namespacetemplate) {
-                            $params['namespace'] = $message->namespacetemplate;
-                        } else {
-                            abort(422, "Namespace es requerido para este método");
-                        }
 
-                        if ($message->template) {
-                            $params['template'] = $message->template;
-                        } else {
-                            abort(422, "Template es requerido para este método");
-                        }
-
-                        if ($message->language) {
-                            $params['language'] = $message->language;
-                        } else {
-                            abort(422, "Language es requerido para este método");
-                        }
-
-                        if ($message->params) {
-                            $params['params'] = $message->params;
-                        }
-
-                        $response = $cliente->request('POST', $url . "sendTemplate?token=" . $token, [
-                            $this->config->getFormat() => $params, 'timeout' => 25]);
+                    if ($message->caption) {
+                        $params['caption'] = $message->caption;
                     }
-                    break;
-            }
-            $html = (string) $response->getBody();
-        } catch (RequestException $e) {
-            if ($e->hasResponse()) {
-                throw CouldNotSendNotification::errorSending(Psr7\str($e->getResponse()));
-            }
-            throw CouldNotSendNotification::errorSending($e->getMessage());
+
+                    $response = $cliente->request('POST', $url . "sendFile?token=" . $token, [
+                        $format => $params, 'timeout' => 25]);
+                }
+                break;
+            case 'sendTemplate':{
+                    if ($message->namespacetemplate) {
+                        $params['namespace'] = $message->namespacetemplate;
+                    } else {
+                        abort(422, "Namespace es requerido para este método");
+                    }
+
+                    if ($message->template) {
+                        $params['template'] = $message->template;
+                    } else {
+                        abort(422, "Template es requerido para este método");
+                    }
+
+                    if ($message->language) {
+                        $params['language'] = $message->language;
+                    } else {
+                        abort(422, "Language es requerido para este método");
+                    }
+
+                    if ($message->params) {
+                        $params['params'] = $message->params;
+                    }
+
+                    $response = $cliente->request('POST', $url . "sendTemplate?token=" . $token, [
+                        $format => $params, 'timeout' => 25]);
+                }
+                break;
         }
+        $html = (string) $response->getBody();
 
         return $response;
     }
